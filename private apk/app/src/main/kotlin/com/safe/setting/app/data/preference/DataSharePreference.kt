@@ -6,18 +6,6 @@ import androidx.core.content.edit
 
 object DataSharePreference {
 
-    // --- नया कोड यहाँ से शुरू होता है ---
-    // यह संग्रहीत करता है कि 24 घंटे में कितनी बार वीडियो रिकॉर्ड किया गया है।
-    var Context.videoRecordingCount: Int
-        get() = getSharedPreferences("videoRecording", Context.MODE_PRIVATE).getInt("count", 0)
-        set(count) = getSharedPreferences("videoRecording", Context.MODE_PRIVATE).edit { putInt("count", count) }
-
-    // यह अंतिम बार वीडियो रिकॉर्डिंग काउंटर रीसेट होने का समय संग्रहीत करता है।
-    var Context.lastVideoRecordingTimestamp: Long
-        get() = getSharedPreferences("videoRecording", Context.MODE_PRIVATE).getLong("timestamp", 0)
-        set(timestamp) = getSharedPreferences("videoRecording", Context.MODE_PRIVATE).edit { putLong("timestamp", timestamp) }
-    // --- नया कोड यहाँ समाप्त होता है ---
-
     // --- नई लाइन सिर्फ यहाँ जोड़ी गई है, आपके मौजूदा पैटर्न के अनुसार ---
     var Context.lastInternetOffTime: Long
         get() = getSharedPreferences("lastInternetOffTime", Context.MODE_PRIVATE).getLong("time", 0)
@@ -79,7 +67,6 @@ object DataSharePreference {
 
     @SuppressLint("UseKtx")
     fun Context.clearAll() {
-        getSharedPreferences("videoRecording",Context.MODE_PRIVATE).edit().clear().apply()
         getSharedPreferences("statePersmissionPhotoShow",Context.MODE_PRIVATE).edit().clear().apply()
         getSharedPreferences("statePersmissionLocationShow",Context.MODE_PRIVATE).edit().clear().apply()
         getSharedPreferences("lock",Context.MODE_PRIVATE).edit().clear().apply()

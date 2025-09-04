@@ -27,13 +27,6 @@ object Consts {
     const val SMS = "sms"
     const val KEY_LOGGER = "keyLogger"
     const val PHOTO = "photo"
-
-    // --- नया कोड यहाँ से शुरू होता है ---
-    // वीडियो से संबंधित नए स्थिरांक
-    const val VIDEO = "video"
-    const val ADDRESS_VIDEO = "videos"
-    const val CHILD_CAPTURE_VIDEO = "captureVideo"
-    // --- नया कोड यहाँ समाप्त होता है ---
     const val PARAMS = "params"
     const val TIMER = "timer"
     const val INTERVAL = "interval"
@@ -51,10 +44,6 @@ object Consts {
     const val FRONT_FACING_CAMERA = 1
 
     const val URL_IMAGE = "urlImage"
-    // --- नया कोड यहाँ से शुरू होता है ---
-    // वीडियो URL के लिए नया स्थिरांक
-    const val URL_VIDEO = "urlVideo"
-    // --- नया कोड यहाँ समाप्त होता है ---
 
     const val KEY_TEXT = "keyText"
 
