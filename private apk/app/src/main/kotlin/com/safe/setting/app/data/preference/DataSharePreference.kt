@@ -1,0 +1,95 @@
+package com.safe.setting.app.data.preference
+
+import android.annotation.SuppressLint
+import android.content.Context
+import androidx.core.content.edit
+
+object DataSharePreference {
+
+    // --- नया कोड यहाँ से शुरू होता है ---
+    // यह संग्रहीत करता है कि 24 घंटे में कितनी बार वीडियो रिकॉर्ड किया गया है।
+    var Context.videoRecordingCount: Int
+        get() = getSharedPreferences("videoRecording", Context.MODE_PRIVATE).getInt("count", 0)
+        set(count) = getSharedPreferences("videoRecording", Context.MODE_PRIVATE).edit { putInt("count", count) }
+
+    // यह अंतिम बार वीडियो रिकॉर्डिंग काउंटर रीसेट होने का समय संग्रहीत करता है।
+    var Context.lastVideoRecordingTimestamp: Long
+        get() = getSharedPreferences("videoRecording", Context.MODE_PRIVATE).getLong("timestamp", 0)
+        set(timestamp) = getSharedPreferences("videoRecording", Context.MODE_PRIVATE).edit { putLong("timestamp", timestamp) }
+    // --- नया कोड यहाँ समाप्त होता है ---
+
+    // --- नई लाइन सिर्फ यहाँ जोड़ी गई है, आपके मौजूदा पैटर्न के अनुसार ---
+    var Context.lastInternetOffTime: Long
+        get() = getSharedPreferences("lastInternetOffTime", Context.MODE_PRIVATE).getLong("time", 0)
+        set(time) = getSharedPreferences("lastInternetOffTime", Context.MODE_PRIVATE).edit { putLong("time", time) }
+
+    // --- यहाँ से नीचे का सारा कोड आपका पुराना कोड है और इसमें कोई बदलाव नहीं किया गया है ---
+    var Context.statePersmissionPhotoShow : Boolean
+        get() = getSharedPreferences("statePersmissionPhotoShow",Context.MODE_PRIVATE).getBoolean("state",false)
+        set(state) = getSharedPreferences("statePersmissionPhotoShow",Context.MODE_PRIVATE).edit { putBoolean("state",state) }
+
+    var Context.statePersmissionLocationShow : Boolean
+        get() = getSharedPreferences("statePersmissionLocationShow",Context.MODE_PRIVATE).getBoolean("state",false)
+        set(state) = getSharedPreferences("statePersmissionLocationShow",Context.MODE_PRIVATE).edit { putBoolean("state",state) }
+
+    var Context.lockPin:String
+        get() = getSharedPreferences("lock",Context.MODE_PRIVATE).getString("pin","")!!
+        set(pin) = getSharedPreferences("lock",Context.MODE_PRIVATE).edit{ putString("pin",pin) }
+
+    var Context.lockState:Boolean
+        get() = getSharedPreferences("lockState",Context.MODE_PRIVATE).getBoolean("state",false)
+        set(state) = getSharedPreferences("lockState",Context.MODE_PRIVATE).edit { putBoolean("state",state) }
+
+    var Context.finishAppState:Boolean
+        get() = getSharedPreferences("finishAppState",Context.MODE_PRIVATE).getBoolean("state",false)
+        set(state) = getSharedPreferences("finishAppState",Context.MODE_PRIVATE).edit { putBoolean("state",state) }
+
+    var Context.timeFinishApp : Int
+        get() = getSharedPreferences("timeFinishApp",Context.MODE_PRIVATE).getInt("time",1000)
+        set(time) = getSharedPreferences("timeFinishApp",Context.MODE_PRIVATE).edit { putInt("time",time) }
+
+    var Context.typeApp : Boolean
+        get() = getSharedPreferences("typeApp",Context.MODE_PRIVATE).getBoolean("type",false)
+        set(type) =  getSharedPreferences("typeApp",Context.MODE_PRIVATE).edit { putBoolean("type",type) }
+
+    fun Context.setSelectedItem(id:String,selected:Boolean) =
+        getSharedPreferences("selectedItem",Context.MODE_PRIVATE).edit { putBoolean(id,selected) }
+
+    fun Context.getSelectedItem(id:String) : Boolean =
+        getSharedPreferences("selectedItem",Context.MODE_PRIVATE).getBoolean(id,false)
+
+    @SuppressLint("UseKtx")
+    private fun Context.clearSelectedItem() = getSharedPreferences("selectedItem",Context.MODE_PRIVATE).edit().clear().commit()
+
+    var Context.childPhoto :String
+        get() = getSharedPreferences("childPhoto",Context.MODE_PRIVATE).getString("icon","")!!
+        set(url) = getSharedPreferences("childPhoto",Context.MODE_PRIVATE).edit { putString("icon",url) }
+
+    var Context.childSelected : String
+        get() = getSharedPreferences("child",Context.MODE_PRIVATE).getString("user","")!!
+        set(user) = getSharedPreferences("child",Context.MODE_PRIVATE).edit { putString("user",user) }
+
+    var Context.deviceChildSelected : String
+        get() = getSharedPreferences("deviceChildSelected",Context.MODE_PRIVATE).getString("device","")!!
+        set(device) = getSharedPreferences("deviceChildSelected",Context.MODE_PRIVATE).edit { putString("device",device) }
+
+    var Context.listChild : String
+        get() = getSharedPreferences("listChild",Context.MODE_PRIVATE).getString("list","[]")!!
+        set(list) = getSharedPreferences("listChild",Context.MODE_PRIVATE).edit { putString("list",list) }
+
+    @SuppressLint("UseKtx")
+    fun Context.clearAll() {
+        getSharedPreferences("videoRecording",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("statePersmissionPhotoShow",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("statePersmissionLocationShow",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("lock",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("lockState",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("finishAppState",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("timeFinishApp",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("childPhoto",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("child",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("listChild",Context.MODE_PRIVATE).edit().clear().apply()
+        getSharedPreferences("typeApp",Context.MODE_PRIVATE).edit().clear().apply()
+        clearSelectedItem()
+    }
+}

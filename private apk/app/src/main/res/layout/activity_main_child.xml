@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_background"
+    tools:context=".ui.activities.mainchild.MainChildActivity">
+
+    <TextView
+        android:id="@+id/tv_child_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/final_setupll"
+        android:textColor="@color/dark_text_primary"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_child_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/please_enable_the_required_services_to_continue12"
+        android:textColor="@color/dark_text_secondary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_child_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_child_title" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_hide_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_child_subtitle">
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
+
+            <!-- मौजूदा टॉगल 1: Overdraw -->
+            <RelativeLayout
+                android:id="@+id/btn_enable_overdraw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dark_input_background"
+                android:padding="20dp">
+                <ImageView
+                    android:id="@+id/icon_overdraw"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/todob"
+                    android:src="@drawable/ic_layers_24"
+                    app:tint="@color/dark_accent"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/icon_overdraw"
+                    android:layout_toStartOf="@+id/switch_overdraw"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/enable_overdraw"
+                    android:textColor="@color/dark_text_primary"
+                    android:textSize="16sp"
+                    android:layout_centerVertical="true"/>
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_overdraw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="false" />
+            </RelativeLayout>
+
+            <!-- मौजूदा टॉगल 2: Accessibility Service -->
+            <RelativeLayout
+                android:id="@+id/btn_enable_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dark_input_background"
+                android:padding="20dp">
+                <ImageView
+                    android:id="@+id/icon_service"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/todob"
+                    android:src="@drawable/ic_accessibility_24"
+                    app:tint="@color/dark_accent"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/icon_service"
+                    android:layout_toStartOf="@+id/switch_accessibility"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/enable_service"
+                    android:textColor="@color/dark_text_primary"
+                    android:textSize="16sp"
+                    android:layout_centerVertical="true"/>
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_accessibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="false" />
+            </RelativeLayout>
+
+            <!-- मौजूदा टॉगल 3: Notification Listener -->
+            <RelativeLayout
+                android:id="@+id/btn_enable_service_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dark_input_background"
+                android:padding="20dp">
+                <ImageView
+                    android:id="@+id/icon_notification"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/todob"
+                    android:src="@drawable/ic_notifications_24"
+                    app:tint="@color/dark_accent"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/icon_notification"
+                    android:layout_toStartOf="@+id/switch_notification"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/enable_service_notification_listener"
+                    android:textColor="@color/dark_text_primary"
+                    android:textSize="16sp"
+                    android:layout_centerVertical="true"/>
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="false" />
+            </RelativeLayout>
+
+            <!-- मौजूदा टॉगल 4: Whitelist -->
+            <RelativeLayout
+                android:id="@+id/btn_add_whitelist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dark_input_background"
+                android:padding="20dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+                <ImageView
+                    android:id="@+id/icon_whitelist"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/todob"
+                    android:src="@drawable/ic_shield_24"
+                    app:tint="@color/dark_accent"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/icon_whitelist"
+                    android:layout_toStartOf="@+id/switch_add_whitelist"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/add_to_whitelist"
+                    android:textColor="@color/dark_text_primary"
+                    android:textSize="16sp"
+                    android:layout_centerVertical="true"/>
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_add_whitelist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="false" />
+            </RelativeLayout>
+
+            <!-- **** नया टॉगल 1: ऐप नोटिफिकेशन सेटिंग्स **** -->
+            <RelativeLayout
+                android:id="@+id/btn_app_notification_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dark_input_background"
+                android:padding="20dp">
+                <ImageView
+                    android:id="@+id/icon_app_notification"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/todob"
+                    android:src="@drawable/ic_notifications_24"
+                    app:tint="@color/dark_accent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toStartOf="@+id/switch_app_notification"
+                    android:layout_toEndOf="@id/icon_app_notification"
+                    android:text="@string/enable_app_notifications"
+                    android:textColor="@color/dark_text_primary"
+                    android:textSize="16sp" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_app_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="false" />
+            </RelativeLayout>
+
+            <!-- **** नया टॉगल 2: प्ले स्टोर नोटिफिकेशन सेटिंग्स **** -->
+            <RelativeLayout
+                android:id="@+id/btn_playstore_notification_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dark_input_background"
+                android:padding="20dp">
+                <ImageView
+                    android:id="@+id/icon_playstore_notification"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/todob"
+                    android:src="@drawable/ic_play_store_24"
+                    app:tint="@color/dark_accent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toStartOf="@+id/switch_playstore_notification"
+                    android:layout_toEndOf="@id/icon_playstore_notification"
+                    android:text="@string/enable_playstore_notifications"
+                    android:textColor="@color/dark_text_primary"
+                    android:textSize="16sp" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_playstore_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:clickable="false" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_hide_app"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/dark_button_background"
+        android:text="@string/hide_app"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

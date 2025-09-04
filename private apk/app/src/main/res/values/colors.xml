@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- New Dark Theme Palette -->
+    <color name="dark_background">#202125</color>
+    <color name="dark_input_background">#2C2D31</color>
+    <color name="dark_text_primary">#FFFFFF</color>
+    <color name="dark_text_secondary">#A8A9AD</color>
+    <color name="dark_accent">#8A92FC</color>
+    <color name="dark_underline">#4A4B4F</color>
+
+    <color name="colorPrimary">#8A92FC</color>
+    <color name="colorPrimaryDark">#8A92FC</color>
+    <color name="colorAccent">#8A92FC</color>
+    <color name="colorAccentTransp">#A1FFFFFF</color>
+    <color name="colorAccentSemiTransp">#427094</color>
+
+    <color name="colorSelected">#F0D5D6</color>
+    <color name="colorActionModeBackground">#8A92FC</color>
+    <color name="colorActionModeStatusBar">#8A92FC</color>
+
+    <color name="colorBlackTransp">#45000000</color>
+
+    <color name="transparent">#52888888</color>
+    <color name="transparentWhite">#00000000</color>
+    <color name="colorBorderLogin">#D9D9D9</color>
+    <color name="colorGrayTransp">#efefef</color>
+    <color name="colorHintDark">#BBBBBB</color>
+
+    <color name="colorTextPrimaryDark">#FEFEFE</color>
+
+    <color name="colorTextDisabled">#888686</color>
+    <color name="colorTextPlaceholder">#8A000000</color>
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorShaft">#95303030</color>
+    <color name="colorGreen">#8A92FC</color>
+    <color name="blue">#2879C9</color>
+    <color name="blueDark">#1C5996</color>
+    <color name="colorGreen_01">#8A92FC</color>
+    <color name="colorBlue_01">#448AFF</color>
+    <color name="colorRed_01">#8A92FC</color>
+
+    <color name="colorIconTint">#3a3a3a</color>
+
+    <color name="colorDivider">#1F000000</color>
+</resources>

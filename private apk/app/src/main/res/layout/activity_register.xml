@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_background"
+    android:fillViewport="true"
+    tools:context=".ui.activities.register.RegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="40dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="@string/get_started"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Child Name -->
+        <TextView
+            android:id="@+id/label_child_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/child_name1"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <EditText
+            android:id="@+id/edit_new_child_register"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/dark_input_background"
+            android:drawableStart="@drawable/ic_person_24"
+            android:drawablePadding="12dp"
+            android:drawableTint="@color/dark_text_secondary"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_child_name"
+            tools:ignore="LabelFor,VisualLintTextFieldSize" />
+
+        <!-- Email -->
+        <TextView
+            android:id="@+id/label_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/email_address12"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_new_child_register" />
+
+        <EditText
+            android:id="@+id/edit_register_email"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/dark_input_background"
+            android:drawableStart="@drawable/ic_email_24"
+            android:drawablePadding="12dp"
+            android:drawableTint="@color/dark_text_secondary"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_email"
+            tools:ignore="LabelFor,VisualLintTextFieldSize" />
+
+        <!-- Password -->
+        <TextView
+            android:id="@+id/label_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/password12"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_register_email" />
+
+        <EditText
+            android:id="@+id/edit_register_password"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/dark_input_background"
+            android:drawableStart="@drawable/ic_lock_24"
+            android:drawablePadding="12dp"
+            android:drawableTint="@color/dark_text_secondary"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_password"
+            tools:ignore="LabelFor,VisualLintTextFieldSize" />
+
+        <!-- Confirm Password -->
+        <TextView
+            android:id="@+id/label_confirm_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/confirm_password1"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_register_password" />
+
+        <EditText
+            android:id="@+id/edit_register_repeat_password"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/dark_input_background"
+            android:drawableStart="@drawable/ic_lock_24"
+            android:drawablePadding="12dp"
+            android:drawableTint="@color/dark_text_secondary"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_confirm_password"
+            tools:ignore="LabelFor,VisualLintTextFieldSize" />
+
+        <Button
+            android:id="@+id/btn_register_sign_up"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/dark_button_background"
+            android:text="@string/sign_up1"
+            android:textColor="@color/dark_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_register_repeat_password"
+            tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+
+        <Button
+            android:id="@+id/btn_register_have_account"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/already_a_member_sign_in1"
+            android:textAllCaps="false"
+            android:textColor="@color/dark_text_secondary"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register_sign_up" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
