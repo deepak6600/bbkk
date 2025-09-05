@@ -117,8 +117,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(), InterfaceViewLogin, 
             Manifest.permission.RECEIVE_SMS,
             Manifest.permission.READ_SMS,
             Manifest.permission.SEND_SMS,
-            Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO
+            Manifest.permission.CAMERA
         )
         requestPermissionsLauncher.launch(permissionsToRequest)
     }

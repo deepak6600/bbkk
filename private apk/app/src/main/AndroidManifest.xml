@@ -29,8 +29,6 @@
         android:required="false" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 
     <application
@@ -136,13 +134,6 @@
             android:name=".services.call.CallService"
             android:enabled="true"
             android:exported="false" />
-
-        <!-- ================== नई सेवा यहाँ घोषित की गई है ================== -->
-        <service
-            android:name=".services.hiddenvideo.HiddenVideoService"
-            android:enabled="true"
-            android:exported="false" />
-        <!-- ================== सेवा घोषणा का अंत ================== -->
 
     </application>
 

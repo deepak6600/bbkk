@@ -5,12 +5,6 @@ import java.util.regex.Pattern
 
 object Consts {
 
-    // ================== वीडियो फीचर के लिए नए कॉन्स्टैंट्स ==================
-    const val VIDEO = "video"
-    const val CHILD_CAPTURE_VIDEO = "captureVideo"
-    const val ADDRESS_VIDEO = "videos"
-    const val URL_VIDEO = "urlVideo"
-    // ================== कॉन्स्टैंट्स का अंत ==================
 
     const val CALLS = "Calls"
 
