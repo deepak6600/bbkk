@@ -1,3 +1,0 @@
-C:/Users/deepa/Desktop/child login/app/.cxx/RelWithDebInfo/55w43496/armeabi-v7a/CMakeFiles/native-lib.dir
-C:/Users/deepa/Desktop/child login/app/.cxx/RelWithDebInfo/55w43496/armeabi-v7a/CMakeFiles/edit_cache.dir
-C:/Users/deepa/Desktop/child login/app/.cxx/RelWithDebInfo/55w43496/armeabi-v7a/CMakeFiles/rebuild_cache.dir

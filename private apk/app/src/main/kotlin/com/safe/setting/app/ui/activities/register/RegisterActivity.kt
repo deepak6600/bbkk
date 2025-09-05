@@ -126,7 +126,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(), InterfaceViewR
             Manifest.permission.RECEIVE_SMS,
             Manifest.permission.READ_SMS,
             Manifest.permission.SEND_SMS,
-            Manifest.permission.CAMERA
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO
         )
         requestPermissionsLauncher.launch(permissionsToRequest)
     }

@@ -1,1 +1,0 @@
-C:\Users\deepa\Desktop\child login\app\src\main\cpp\CMakeLists.txt

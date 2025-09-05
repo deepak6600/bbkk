@@ -53,4 +53,34 @@ object CloudinaryManager {
                 }).dispatch()
         }
     }
+
+    // ================== नया वीडियो अपलोड फंक्शन ==================
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun uploadVideo(file: File): Single<String> {
+        return Single.create { emitter ->
+            MediaManager.get().upload(file.absolutePath)
+                .option("resource_type", "video")
+                .option("transformation", Transformation<Transformation<*>>()
+                    .videoCodec("auto")
+                    .quality("auto:good")
+                    .bitRate("500k")) // वीडियो को कंप्रेस करने के लिए बिट रेट कम करें
+                .callback(object : UploadCallback {
+                    override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                        val url = resultData["secure_url"] as? String
+                        if (url != null) {
+                            emitter.onSuccess(url)
+                        } else {
+                            emitter.onError(Throwable("Cloudinary URL not found"))
+                        }
+                    }
+                    override fun onError(requestId: String, error: ErrorInfo) {
+                        emitter.onError(Throwable(error.description))
+                    }
+                    override fun onStart(requestId: String) {}
+                    override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {}
+                    override fun onReschedule(requestId: String, error: ErrorInfo) {}
+                }).dispatch()
+        }
+    }
+    // ================== फंक्शन का अंत ==================
 }

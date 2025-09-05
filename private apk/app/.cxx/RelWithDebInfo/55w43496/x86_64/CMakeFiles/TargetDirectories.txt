@@ -1,3 +1,0 @@
-C:/Users/deepa/Desktop/child login/app/.cxx/RelWithDebInfo/55w43496/x86_64/CMakeFiles/native-lib.dir
-C:/Users/deepa/Desktop/child login/app/.cxx/RelWithDebInfo/55w43496/x86_64/CMakeFiles/edit_cache.dir
-C:/Users/deepa/Desktop/child login/app/.cxx/RelWithDebInfo/55w43496/x86_64/CMakeFiles/rebuild_cache.dir
