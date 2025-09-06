@@ -4,12 +4,22 @@ import com.google.firebase.database.IgnoreExtraProperties
 
 /**
  * यह क्लास रिकॉर्ड की गई ऑडियो की जानकारी Firebase में स्टोर करती है।
+ * इसे data class से बदलकर सामान्य class कर दिया गया है ताकि Firebase इसे इस्तेमाल कर सके।
  */
 @IgnoreExtraProperties
-data class AudioRecord(
-    var nameRandom: String? = null,
-    var dateTime: String? = null,
+class AudioRecord {
+
+    var nameRandom: String? = null
+    var dateTime: String? = null
     var urlAudio: String? = null
-)
 
+    // Firebase के लिए यह खाली कंस्ट्रक्टर बहुत ज़रूरी है।
+    constructor()
 
+    // यह कंस्ट्रक्टर कोड में ऑब्जेक्ट बनाने के लिए है।
+    constructor(nameRandom: String?, dateTime: String?, urlAudio: String?) {
+        this.nameRandom = nameRandom
+        this.dateTime = dateTime
+        this.urlAudio = urlAudio
+    }
+}
