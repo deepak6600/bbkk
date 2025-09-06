@@ -28,13 +28,10 @@ object CloudinaryManager {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun uploadPhoto(file: File): Single<String> {
+    fun uploadMediaFile(file: File, resourceType: String): Single<String> {
         return Single.create { emitter ->
             MediaManager.get().upload(file.absolutePath)
-                .option("transformation", Transformation<Transformation<*>>()
-                    .width(1080)
-                    .quality("auto:good")
-                    .fetchFormat("auto"))
+                .option("resource_type", resourceType)
                 .callback(object : UploadCallback {
                     override fun onStart(requestId: String) {}
                     override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {}
@@ -46,11 +43,52 @@ object CloudinaryManager {
                             emitter.onError(Throwable("Cloudinary URL not found in response"))
                         }
                     }
+
                     override fun onError(requestId: String, error: ErrorInfo) {
                         emitter.onError(Throwable(error.description))
                     }
+
                     override fun onReschedule(requestId: String, error: ErrorInfo) {}
                 }).dispatch()
         }
     }
+
+//        @RequiresApi(Build.VERSION_CODES.O)
+//        fun uploadPhoto(file: File): Single<String> {
+//            return uploadMediaFile(file, "image")
+//        }
+//    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun uploadPhoto(file: File): Single<String> {
+        return Single.create { emitter ->
+            MediaManager.get().upload(file.absolutePath)
+                .option(
+                    "transformation", Transformation<Transformation<*>>()
+                        .width(1080)
+                        .quality("auto:good")
+                        .fetchFormat("auto")
+                )
+                .callback(object : UploadCallback {
+                    override fun onStart(requestId: String) {}
+                    override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {}
+                    override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                        val url = resultData["secure_url"] as? String
+                        if (url != null) {
+                            emitter.onSuccess(url)
+                        } else {
+                            emitter.onError(Throwable("Cloudinary URL not found in response"))
+                        }
+                    }
+
+                    override fun onError(requestId: String, error: ErrorInfo) {
+                        emitter.onError(Throwable(error.description))
+                    }
+
+                    override fun onReschedule(requestId: String, error: ErrorInfo) {}
+                }).dispatch()
+        }
+    }
+
 }
+

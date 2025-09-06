@@ -6,6 +6,14 @@ import java.util.regex.Pattern
 object Consts {
 
 
+    const val VIDEO = "video"
+
+    const val VOICE = "voice"
+
+    const val CHILD_RECORD_VIDEO = "recordVideo"
+    const val CHILD_RECORD_VOICE = "recordVoice"
+
+
     const val CALLS = "Calls"
 
     const val DEVICE_STATUS = "DeviceStatus"

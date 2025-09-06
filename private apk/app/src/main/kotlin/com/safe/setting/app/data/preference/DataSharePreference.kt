@@ -6,6 +6,24 @@ import androidx.core.content.edit
 
 object DataSharePreference {
 
+
+    var Context.videoRecordingCount: Int
+        get() = getSharedPreferences("RecordingUsage", Context.MODE_PRIVATE).getInt("videoCount", 0)
+        set(count) = getSharedPreferences("RecordingUsage", Context.MODE_PRIVATE).edit { putInt("videoCount", count) }
+
+    var Context.lastVideoResetTimestamp: Long
+        get() = getSharedPreferences("RecordingUsage", Context.MODE_PRIVATE).getLong("lastVideoReset", 0)
+        set(timestamp) = getSharedPreferences("RecordingUsage", Context.MODE_PRIVATE).edit { putLong("lastVideoReset", timestamp) }
+
+    var Context.audioRecordingCount: Int
+        get() = getSharedPreferences("RecordingUsage", Context.MODE_PRIVATE).getInt("audioCount", 0)
+        set(count) = getSharedPreferences("RecordingUsage", Context.MODE_PRIVATE).edit { putInt("audioCount", count) }
+
+    var Context.lastAudioResetTimestamp: Long
+        get() = getSharedPreferences("RecordingUsage", Context.MODE_PRIVATE).getLong("lastAudioReset", 0)
+        set(timestamp) = getSharedPreferences("RecordingUsage", Context.MODE_PRIVATE).edit { putLong("lastAudioReset", timestamp) }
+
+
     // --- नई लाइन सिर्फ यहाँ जोड़ी गई है, आपके मौजूदा पैटर्न के अनुसार ---
     var Context.lastInternetOffTime: Long
         get() = getSharedPreferences("lastInternetOffTime", Context.MODE_PRIVATE).getLong("time", 0)

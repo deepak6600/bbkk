@@ -23,4 +23,9 @@ interface InterfaceAccessibility {
     fun startCountDownTimer()
 
     fun stopCountDownTimer()
+
+    fun getRecordVideoCommand()
+
+    fun getRecordAudioCommand()
+
 }
